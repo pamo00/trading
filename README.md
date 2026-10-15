@@ -1,6 +1,6 @@
 # Systematic Trading Research & Automation
 
-> **Status: Research / prototype.** No live strategy or profitable trading edge has been validated yet. This repository is intended to research, backtest, and eventually automate systematic trading strategies—not to present historical examples as investment results.
+> **Status: Research / prototype.** No live strategy or profitable trading edge has been validated yet. This repository is intended to research, backtest, and eventually automate systematic trading strategies — not to present historical examples as investment results.
 
 ## 1. Project objective
 
@@ -149,7 +149,7 @@ A backtest must model or explicitly report its assumptions for:
 
 ### Performance evaluation
 
-Report at least: trade count, win rate, average R, expectancy **net of costs**, profit factor, maximum drawdown, equity curve, return variability, longest losing streak, average holding time, MFE/MAE, exposure, and results by month/year/market regime.
+Report at least: trade count, win rate, average R, expectancy **net of costs**, profit factor, maximum drawdown, equity curve, return variability, longest losing streak, average holding time, maximum favorable excursion (MFE) / maximum adverse excursion (MAE), exposure, and results by month/year/market regime.
 
 Use **chronological train/validation/test splits**, out-of-sample and walk-forward testing. Avoid choosing parameters on the final holdout sample. Compare with the baseline strategies, stress-test execution costs, and inspect sensitivity rather than only reporting the best parameter set. If many strategies are tried, account for selection/overfitting risk.
 
@@ -164,7 +164,7 @@ These are **configurable example account limits**, not current broker or FTMO co
 | Normal setup risk | **$25 per trade** |
 | A+ setup risk | **$35 per trade** |
 | Maximum trade attempts per session | **2** |
-| Absolute session risk ceiling | **$97** |
+| Absolute session risk ceiling | **$100** (1% of 10k\$ account balance)|
 | Trade management | TP1/TP2 partial exits; optional SL-to-BE test |
 
 Size positions from the stop distance and the symbol's verified monetary point value, e.g. `volume = risk_budget / (stop_distance × money_per_price_unit_per_lot)` before rounding to valid lot increments and checking costs and margin. **Do not assume “points” or lot values are consistent across assets.** Reject trades that violate the risk or execution constraints.
@@ -181,7 +181,7 @@ A production bot should:
 - Log signals, orders, fills, transaction costs, errors, and resulting P&L.
 - Alert on failures and require periodic oversight; “automated” does not mean risk-free or maintenance-free.
 
-**FTMO compatibility must be checked against the applicable account type and current rules before deployment**, including any algorithmic trading, daily loss, maximum loss, and prohibited-practice requirements. Start with **backtests → paper/demo forward tests → tightly controlled live deployment only if justified**. Do not use the verification account as the initial experiment.
+**FTMO compatibility must be checked against the applicable account type and current rules before deployment**, including any algorithmic trading, daily loss, maximum loss, and prohibited-practice requirements. Start with **backtests → paper/demo forward tests → tightly controlled live deployment only if justified**. Do not use the FTMO verification account as the initial experiment.
 
 ## 8. Proposed repository structure
 
